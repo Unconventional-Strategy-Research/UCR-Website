@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab — USR</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero { padding: 140px 0 72px; }
+.page-hero-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+.page-hero-label::before { content: ''; width: 32px; height: 1px; background: var(--blue); }
+.page-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 300; line-height: 1.05;
+  letter-spacing: -0.01em; margin-bottom: 24px;
+}
+.page-hero-title em { font-style: italic; color: var(--blue); }
+.page-hero-row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+.page-hero-sub { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 500px; }
+.lab-status {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid var(--border2); border-radius: 20px; padding: 6px 14px;
+}
+.lab-status .dot { width: 5px; height: 5px; border-radius: 50%; background: #60e8a0; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+/* STAT ROW */
+.stat-row {
+  display: flex; gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 12px;
+  overflow: hidden; margin-bottom: 64px;
+}
+.stat-item { background: var(--surface); flex: 1; padding: 24px 28px; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 300; color: var(--blue); line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+}
+
+/* TOOL GRID */
+.tool-section { padding: 80px 0; }
+.tool-section-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 12px;
+}
+.tool-section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 20px; }
+
+/* LIVE TOOL */
+.tool-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px;
+  text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+  transition: all 0.22s; position: relative; overflow: hidden;
+}
+.tool-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 15% 15%, rgba(136,153,221,0.08), transparent 55%);
+  opacity: 0; transition: opacity 0.22s;
+}
+.tool-card:hover { border-color: rgba(136,153,221,0.45); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(136,153,221,0.09); }
+.tool-card:hover::before { opacity: 1; }
+.tool-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.tool-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--blue-dim); border: 1px solid rgba(136,153,221,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+.tool-id {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted2);
+}
+.tool-live-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: #60e8a0; border: 1px solid rgba(96,232,160,0.25);
+  border-radius: 6px; padding: 3px 8px;
+}
+.tool-live-badge::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: #60e8a0; animation: pulse 2s infinite; }
+.tool-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 12px; }
+.tool-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; flex: 1; }
+.tool-modules { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+.tool-module-row {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; color: var(--muted); padding: 8px 12px;
+  background: var(--bg); border-radius: 8px; border: 1px solid var(--border);
+}
+.tool-module-row .m-num { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--blue); letter-spacing: 0.1em; flex-shrink: 0; width: 24px; }
+.tool-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.tool-chip { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 5px; border: 1px solid var(--border2); color: var(--muted); }
+.tool-chip.hl { border-color: rgba(136,153,221,0.3); color: var(--blue); }
+.tool-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 6px; transition: gap 0.18s; }
+.tool-card:hover .tool-link { gap: 10px; }
+
+/* PIPELINE CARDS */
+.pipeline-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 16px; }
+.pipeline-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px 28px; opacity: 0.55;
+}
+.pipeline-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.pc-icon { font-size: 1.3rem; }
+.pc-stage {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted2); border: 1px solid var(--border); border-radius: 5px; padding: 2px 8px;
+}
+.pc-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin-bottom: 8px; }
+.pc-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* PHILOSOPHY */
+.philosophy { padding: 80px 0; background: var(--surface); }
+.phil-inner { max-width: 680px; }
+.phil-body { font-size: 14px; color: var(--muted); line-height: 1.85; margin-top: 24px; }
+.phil-body p { margin-bottom: 16px; }
+.phil-body p:last-child { margin-bottom: 0; }
+.phil-body strong { color: var(--text); font-weight: 400; }
+
+@media (max-width: 768px) {
+  .stat-row { flex-direction: column; gap: 1px; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .pipeline-grid { grid-template-columns: 1fr; }
+  .page-hero-row { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="logo_with_star__1_.png" alt="USR">
+      <span class="nav-wordmark"><span>U</span>SR</span>
+    </a>
+    <div class="nav-links">
+      <a href="approach.html">Approach</a>
+      <a href="lab.html" class="active">Lab</a>
+      <a href="https://www.linkedin.com/company/unconventional-strategy-research/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-hero">
+    <div class="page-hero-label fade-up delay-1">Research Lab</div>
+    <h1 class="page-hero-title fade-up delay-2">
+      Built from the<br><em>research</em>
+    </h1>
+    <div class="page-hero-row fade-up delay-3">
+      <p class="page-hero-sub">Every tool here is a direct output of our framework synthesis work — not built to be a product, but because building was the best way to understand.</p>
+      <div class="lab-status"><span class="dot"></span> Active development</div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- TOOL SECTION -->
+<section class="tool-section">
+  <div class="wrap">
+
+    <!-- STATS -->
+    <div class="stat-row fade-up delay-1">
+      <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">Live tool</div></div>
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Modules in CaseIQ</div></div>
+      <div class="stat-item"><div class="stat-num">75</div><div class="stat-label">Questions</div></div>
+      <div class="stat-item"><div class="stat-num">2+</div><div class="stat-label">Tools in pipeline</div></div>
+    </div>
+
+    <!-- LIVE -->
+    <div class="tool-section-label">Live</div>
+    <div class="tools-grid" style="margin-bottom: 64px;">
+      <a class="tool-card" href="https://unconventional-strategy-research.github.io/caseiq/" target="_blank">
+        <div class="tool-card-top">
+          <div class="tool-icon">🧠</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+            <span class="tool-live-badge">Live</span>
+            <span class="tool-id">001</span>
+          </div>
+        </div>
+        <div class="tool-name">CaseIQ</div>
+        <div class="tool-desc">A consulting thinking trainer built from the frameworks and methodologies of the world's top strategy firms. Six modules that take you from zero knowledge of frameworks to structured, flexible thinking — through questions, not lectures.</div>
+        <div class="tool-modules">
+          <div class="tool-module-row"><span class="m-num">01</span>Framework Remix Matrix</div>
+          <div class="tool-module-row"><span class="m-num">02</span>Master Bucket Identification</div>
+          <div class="tool-module-row"><span class="m-num">03</span>The 7 Hidden Equations</div>
+          <div class="tool-module-row"><span class="m-num">04</span>Consulting Math Under Pressure</div>
+          <div class="tool-module-row"><span class="m-num">05</span>Hypothesis Generation</div>
+          <div class="tool-module-row"><span class="m-num">06</span>Synthesis &amp; Recommendation</div>
+        </div>
+        <div class="tool-meta">
+          <span class="tool-chip hl">75 questions</span>
+          <span class="tool-chip hl">Case prep</span>
+          <span class="tool-chip">Free</span>
+          <span class="tool-chip">No account needed</span>
+        </div>
+        <div class="tool-link">Open CaseIQ →</div>
+      </a>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="tool-section-label">In Development</div>
+    <div class="pipeline-grid">
+      <div class="pipeline-card">
+        <div class="pipeline-card-top">
+          <span class="pc-icon">📐</span>
+          <span class="pc-stage">Research phase</span>
+        </div>
+        <div class="pc-name">Framework Atlas</div>
+        <div class="pc-desc">An interactive map of strategic frameworks — when to use them, how they connect, and where they break down. Built from our ongoing synthesis research.</div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-card-top">
+          <span class="pc-icon">⚡</span>
+          <span class="pc-stage">Concept</span>
+        </div>
+        <div class="pc-name">Strategy Simulator</div>
+        <div class="pc-desc">End-to-end case simulations — analysis, hypothesis generation, and recommendation in a single timed session. Mimicking the real interview flow.</div>
+      </div>
+      <div class="pipeline-card">
+        <div class="pipeline-card-top">
+          <span class="pc-icon">🔬</span>
+          <span class="pc-stage">Concept</span>
+        </div>
+        <div class="pc-name">Model Builder</div>
+        <div class="pc-desc">A tool for constructing and stress-testing strategic frameworks. The foundation for USR's original model development work.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="wrap">
+    <div class="phil-inner">
+      <div class="section-label">Lab Philosophy</div>
+      <h2 class="section-title">Why we build</h2>
+      <div class="phil-body">
+        <p>Every tool in the Lab starts the same way: we encounter a framework we want to understand better, and we ask <strong>what would it look like to make this trainable?</strong></p>
+        <p>CaseIQ exists because turning six consulting frameworks into 75 questions forced us to understand them at a level that reading alone doesn't produce. You can't write a good question about hypothesis generation without knowing exactly where candidates go wrong.</p>
+        <p><strong>The Lab is the research made tangible.</strong> It's also how we test whether our synthesis is actually right — if we can't build a working tool from a framework, we probably don't understand it well enough yet.</p>
+        <p>Everything here is free. No accounts, no paywalls. The community that uses these tools is the same community that shapes what gets built next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo"><span>U</span>nconventional <span>S</span>trategy &amp; <span>R</span>esearch</div>
+      <div class="footer-links">
+        <a href="approach.html">Approach</a>
+        <a href="lab.html">Lab</a>
+        <a href="https://www.linkedin.com/company/unconventional-strategy-research/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/unconventional-strategy-research" target="_blank">GitHub</a>
+      </div>
+      <div class="footer-copy">© 2025 USR — Building in public</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

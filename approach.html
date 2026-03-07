@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Approach — USR</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero { padding: 140px 0 80px; }
+.page-hero-label {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 10px;
+}
+.page-hero-label::before { content: ''; width: 32px; height: 1px; background: var(--blue); }
+.page-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 300; line-height: 1.05;
+  letter-spacing: -0.01em; margin-bottom: 24px;
+}
+.page-hero-title em { font-style: italic; color: var(--blue); }
+.page-hero-sub {
+  font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 540px;
+}
+
+/* PRINCIPLES */
+.principles { padding: 80px 0; }
+.principle-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-top: 48px; }
+.principle-item {
+  background: var(--surface); padding: 36px 40px;
+  display: grid; grid-template-columns: 80px 1fr 1fr; gap: 32px;
+  align-items: start; transition: background 0.2s;
+}
+.principle-item:hover { background: var(--surface2); }
+.p-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem; font-weight: 300; color: var(--muted2); line-height: 1;
+}
+.p-head {}
+.p-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 400; margin-bottom: 8px;
+}
+.p-tagline {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue);
+}
+.p-body { font-size: 13px; color: var(--muted); line-height: 1.75; }
+.p-body strong { color: var(--text); font-weight: 400; }
+
+/* METHOD */
+.method { padding: 80px 0; background: var(--surface); }
+.method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; align-items: start; }
+.method-steps { display: flex; flex-direction: column; gap: 0; }
+.method-step {
+  display: flex; gap: 20px; padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.method-step:last-child { border-bottom: none; }
+.step-marker {
+  display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0;
+}
+.step-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--blue); margin-top: 5px; flex-shrink: 0;
+}
+.step-line { width: 1px; flex: 1; background: var(--border); margin-top: 6px; min-height: 32px; }
+.method-step:last-child .step-line { display: none; }
+.step-content {}
+.step-num {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 6px;
+}
+.step-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 400; margin-bottom: 6px;
+}
+.step-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+.method-aside {}
+.aside-block {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px 28px; margin-bottom: 16px;
+}
+.aside-block:last-child { margin-bottom: 0; }
+.aside-label {
+  font-family: 'DM Mono', monospace; font-size: 9px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--star); margin-bottom: 10px;
+}
+.aside-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.aside-text strong { color: var(--text); font-weight: 400; }
+
+/* INFLUENCES */
+.influences { padding: 80px 0; }
+.influence-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 48px; }
+.influence-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px;
+  transition: border-color 0.2s;
+}
+.influence-card:hover { border-color: var(--border2); }
+.inf-firm {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 10px;
+}
+.inf-what { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; margin-bottom: 8px; }
+.inf-why { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* WHERE HEADED */
+.direction { padding: 80px 0; background: var(--surface); }
+.direction-inner {
+  max-width: 640px; margin: 0 auto; text-align: center;
+}
+.direction-inner .section-label { justify-content: center; }
+.direction-inner .section-title { text-align: center; }
+.direction-body {
+  font-size: 14px; color: var(--muted); line-height: 1.85;
+  margin-top: 24px; margin-bottom: 40px;
+}
+.direction-body p { margin-bottom: 16px; }
+.direction-body p:last-child { margin-bottom: 0; }
+.direction-body strong { color: var(--text); font-weight: 400; }
+
+@media (max-width: 768px) {
+  .principle-item { grid-template-columns: 1fr; gap: 12px; }
+  .p-num { font-size: 2rem; }
+  .method-grid { grid-template-columns: 1fr; gap: 40px; }
+  .influence-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="logo_with_star__1_.png" alt="USR">
+      <span class="nav-wordmark"><span>U</span>SR</span>
+    </a>
+    <div class="nav-links">
+      <a href="approach.html" class="active">Approach</a>
+      <a href="lab.html">Lab</a>
+      <a href="https://www.linkedin.com/company/unconventional-strategy-research/" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="wrap">
+  <div class="page-hero">
+    <div class="page-hero-label fade-up delay-1">Our Approach</div>
+    <h1 class="page-hero-title fade-up delay-2">
+      How we think<br>about <em>thinking</em>
+    </h1>
+    <p class="page-hero-sub fade-up delay-3">
+      USR is built on three principles. Not a methodology — a set of commitments about how to do this work honestly.
+    </p>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- PRINCIPLES -->
+<section class="principles">
+  <div class="wrap">
+    <div class="section-label">Principles</div>
+    <h2 class="section-title">What we stand for</h2>
+    <div class="principle-list">
+      <div class="principle-item">
+        <div class="p-num">01</div>
+        <div class="p-head">
+          <div class="p-name">Research First</div>
+          <div class="p-tagline">Study before you build</div>
+        </div>
+        <div class="p-body">
+          Original frameworks don't come from nowhere. Before USR develops its own models, we spend serious time with the ones that already exist — the problem-solving processes, portfolio thinking, and results-delivery approaches developed by the world's leading strategy firms. <strong>Understanding what the best have built is not a detour. It's the foundation.</strong>
+        </div>
+      </div>
+      <div class="principle-item">
+        <div class="p-num">02</div>
+        <div class="p-head">
+          <div class="p-name">Learn in Public</div>
+          <div class="p-tagline">The process is the product</div>
+        </div>
+        <div class="p-body">
+          We don't wait until we're finished to share what we've found. The synthesis work, the questions we can't yet answer, the tools we build as tests — all of it gets published as it develops. <strong>Transparency isn't a risk. It's the point.</strong> A community learns faster when the work is visible.
+        </div>
+      </div>
+      <div class="principle-item">
+        <div class="p-num">03</div>
+        <div class="p-head">
+          <div class="p-name">Build to Understand</div>
+          <div class="p-tagline">Tools as proof of comprehension</div>
+        </div>
+        <div class="p-body">
+          The best test of whether you've internalized a framework is whether you can build something from it. CaseIQ wasn't built to be a product first — it was built because <strong>turning six consulting frameworks into a 75-question drill forced us to understand them at a different depth.</strong> Every Lab tool starts the same way.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- METHOD -->
+<section class="method">
+  <div class="wrap">
+    <div class="section-label">Method</div>
+    <h2 class="section-title">How the research works</h2>
+    <div class="method-grid">
+      <div class="method-steps">
+        <div class="method-step">
+          <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-num">Step 01</div>
+            <div class="step-name">Identify a framework or model</div>
+            <div class="step-desc">Starting with the canonical frameworks from the world's top strategy firms — issue trees, profitability structures, portfolio matrices, MECE logic, and beyond.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-num">Step 02</div>
+            <div class="step-name">Break it apart</div>
+            <div class="step-desc">What is the core logic? What does it assume? Where does it work well and where does it fail? What problems is it actually solving?</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-num">Step 03</div>
+            <div class="step-name">Synthesize and publish</div>
+            <div class="step-desc">Write up the synthesis — what we found, what surprised us, how it connects to other models. Published as it's done, not when it's perfect.</div>
+          </div>
+        </div>
+        <div class="method-step">
+          <div class="step-marker"><div class="step-dot"></div><div class="step-line"></div></div>
+          <div class="step-content">
+            <div class="step-num">Step 04</div>
+            <div class="step-name">Build a tool from it</div>
+            <div class="step-desc">If the framework is trainable, we build something that trains it. The Lab is the output of this step — interactive tools that operationalize what we've learned.</div>
+          </div>
+        </div>
+      </div>
+      <div class="method-aside">
+        <div class="aside-block">
+          <div class="aside-label">Why the top firms first</div>
+          <div class="aside-text">The world's leading strategy firms represent the highest-density concentration of structured thinking methodology available publicly. <strong>They're not the only firms that matter</strong> — but they're the right starting point before developing original models.</div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-label">What comes after</div>
+          <div class="aside-text">Eventually, USR develops its own frameworks — particularly for <strong>community-scale strategy and ecosystem thinking</strong>, contexts the big firms don't serve well. That work starts from the foundation being built now.</div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-label">Who this is for</div>
+          <div class="aside-text">People who want to think more rigorously — whether that's for case interviews, career decisions, community leadership, or just <strong>the satisfaction of understanding how good strategy actually works.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- INFLUENCES -->
+<section class="influences">
+  <div class="wrap">
+    <div class="section-label">Influences</div>
+    <h2 class="section-title">What we study</h2>
+    <p class="section-sub">The frameworks and firms we're currently researching and synthesizing.</p>
+    <div class="influence-grid">
+      <div class="influence-card">
+        <div class="inf-firm">Structured Problem Solving</div>
+        <div class="inf-what">Logic & Decomposition</div>
+        <div class="inf-why">MECE logic, issue trees, hypothesis-driven analysis, and the pyramid principle for communication.</div>
+      </div>
+      <div class="influence-card">
+        <div class="inf-firm">Portfolio & Growth Thinking</div>
+        <div class="inf-what">Strategic Positioning</div>
+        <div class="inf-why">Growth-share frameworks, time-based competition, adaptive strategy, and value creation models.</div>
+      </div>
+      <div class="influence-card">
+        <div class="inf-firm">Results Delivery</div>
+        <div class="inf-what">Execution Methodology</div>
+        <div class="inf-why">Full-potential transformation thinking, performance measurement, and change management frameworks.</div>
+      </div>
+      <div class="influence-card">
+        <div class="inf-firm">Case Interview Canon</div>
+        <div class="inf-what">Analytical Frameworks</div>
+        <div class="inf-why">Profitability trees, market sizing, competitive dynamics, and the core structures used across elite consulting recruiting.</div>
+      </div>
+      <div class="influence-card">
+        <div class="inf-firm">Systems Thinking</div>
+        <div class="inf-what">Ecosystem Models</div>
+        <div class="inf-why">Causal loop diagrams, feedback systems, and complexity thinking — inputs for USR's original framework work.</div>
+      </div>
+      <div class="influence-card">
+        <div class="inf-firm">USR — In Development</div>
+        <div class="inf-what">Original Models</div>
+        <div class="inf-why">Community-scale strategy and ecosystem scaling frameworks. The work this research is building toward.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<section class="direction">
+  <div class="wrap">
+    <div class="direction-inner">
+      <div class="section-label">Direction</div>
+      <h2 class="section-title">Where this is going</h2>
+      <div class="direction-body">
+        <p>USR is early. The research is ongoing, the Lab has one tool, and the original frameworks don't exist yet.</p>
+        <p>That's intentional. <strong>We're not presenting a finished institution.</strong> We're building one in public — and the people who find this early are the ones who'll shape what it becomes.</p>
+        <p>The goal is a practice that produces original strategic thinking for contexts the major firms don't prioritise: communities, ecosystems, non-traditional organizations. Getting there requires doing the foundational work first.</p>
+        <p><strong>That's what's happening now.</strong></p>
+      </div>
+      <a href="lab.html" class="btn btn-primary">See what we've built so far →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-logo"><span>U</span>nconventional <span>S</span>trategy &amp; <span>R</span>esearch</div>
+      <div class="footer-links">
+        <a href="approach.html">Approach</a>
+        <a href="lab.html">Lab</a>
+        <a href="https://www.linkedin.com/company/unconventional-strategy-research/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/unconventional-strategy-research" target="_blank">GitHub</a>
+      </div>
+      <div class="footer-copy">© 2025 USR — Building in public</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

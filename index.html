@@ -4,386 +4,177 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Unconventional Strategy & Research</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Epilogue:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --bg:       #0c0e14;
-  --surface:  #111520;
-  --surface2: #181d2e;
-  --border:   #232840;
-  --border2:  #2e3452;
-  --blue:     #8899dd;   /* logo U colour */
-  --star:     #6677cc;   /* logo star */
-  --blue-dim: rgba(136,153,221,0.12);
-  --text:     #e8eaf2;
-  --muted:    #6e7490;
-  --muted2:   #3d4260;
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; padding: 120px 0 80px;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--blue); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--blue); }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 8vw, 6.4rem);
+  font-weight: 300; line-height: 1.0;
+  letter-spacing: -0.01em; margin-bottom: 32px;
+}
+.hero-title em { font-style: italic; color: var(--blue); }
+.hero-title .line2 { display: block; padding-left: clamp(40px, 8vw, 120px); }
+.hero-sub {
+  max-width: 520px; font-size: 15px; line-height: 1.75;
+  color: var(--muted); margin-bottom: 48px;
+}
+.hero-sub strong { color: var(--text); font-weight: 400; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.scroll-hint {
+  margin-top: 80px; display: flex; align-items: center; gap: 12px;
+  font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted2);
+}
+.scroll-line { width: 40px; height: 1px; background: var(--muted2); animation: scrollPulse 2.5s ease infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:0.3;width:40px} 50%{opacity:1;width:60px} }
+
+/* PILLARS */
+.pillars {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; margin-top: 56px;
+}
+.pillar { background: var(--surface); padding: 32px 28px; transition: background 0.2s; }
+.pillar:hover { background: var(--surface2); }
+.pillar-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--star); letter-spacing: 0.15em; margin-bottom: 16px; }
+.pillar-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin-bottom: 10px; }
+.pillar-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* APPROACH STRIP */
+.approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 56px; align-items: start; }
+.approach-text { font-size: 14px; color: var(--muted); line-height: 1.85; }
+.approach-text p { margin-bottom: 16px; }
+.approach-text p:last-child { margin-bottom: 0; }
+.approach-text strong { color: var(--text); font-weight: 400; }
+.approach-quote {
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--blue); border-radius: 0 12px 12px 0; padding: 28px;
+}
+.approach-quote blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 300; font-style: italic;
+  line-height: 1.55; color: var(--text); margin-bottom: 16px;
+}
+.approach-quote cite {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-style: normal;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Epilogue',sans-serif;
-  font-weight:300;
-  min-height:100vh;
-  overflow-x:hidden;
+/* LAB PREVIEW */
+#lab { background: var(--surface); }
+.lab-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
+.lab-status {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid var(--border2); border-radius: 20px; padding: 5px 13px;
 }
+.lab-status .dot { width: 5px; height: 5px; border-radius: 50%; background: #60e8a0; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
+.tool-card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 28px;
+  text-decoration: none; color: inherit; display: flex; flex-direction: column;
+  transition: all 0.22s; position: relative; overflow: hidden;
+}
+.tool-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(136,153,221,0.07), transparent 60%);
+  opacity: 0; transition: opacity 0.22s;
+}
+.tool-card:hover { border-color: rgba(136,153,221,0.4); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(136,153,221,0.08); }
+.tool-card:hover::before { opacity: 1; }
+.tool-tag { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+.tool-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--blue-dim); border: 1px solid rgba(136,153,221,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 20px; }
+.tool-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; margin-bottom: 10px; }
+.tool-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 24px; flex: 1; }
+.tool-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.tool-chip { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 9px; border-radius: 5px; border: 1px solid var(--border2); color: var(--muted); }
+.tool-chip.hl { border-color: rgba(136,153,221,0.3); color: var(--blue); }
+.tool-link { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); display: flex; align-items: center; gap: 6px; transition: gap 0.18s; }
+.tool-card:hover .tool-link { gap: 10px; }
+.tool-card.soon { opacity: 0.45; pointer-events: none; }
+.lab-cta { margin-top: 36px; display: flex; align-items: center; gap: 16px; }
+.lab-cta-text { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 
-/* NOISE LAYER */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;
+/* DISCORD */
+.discord-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 40px 44px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap; margin-top: 48px;
+  position: relative; overflow: hidden;
 }
+.discord-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blue), transparent);
+}
+.discord-left { display: flex; align-items: flex-start; gap: 20px; }
+.discord-icon { width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0; background: var(--blue-dim); border: 1px solid rgba(136,153,221,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+.discord-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 8px; }
+.discord-desc { font-size: 13px; color: var(--muted); line-height: 1.65; max-width: 440px; }
+.discord-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 8px 16px; white-space: nowrap; flex-shrink: 0;
+}
+.discord-badge::before { content: '🔒'; font-size: 11px; }
 
-/* GRID BACKGROUND */
-body::after{
-  content:'';
-  position:fixed;inset:0;
-  background-image:
-    linear-gradient(rgba(136,153,221,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(136,153,221,0.03) 1px, transparent 1px);
-  background-size:60px 60px;
-  pointer-events:none;z-index:0;
+@media (max-width: 768px) {
+  .pillars { grid-template-columns: 1fr; }
+  .approach-grid { grid-template-columns: 1fr; }
+  .lab-header { flex-direction: column; align-items: flex-start; }
+  .discord-card { flex-direction: column; padding: 28px 24px; }
 }
-
-.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 32px;}
-
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  border-bottom:1px solid var(--border);
-  background:rgba(12,14,20,0.85);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-}
-.nav-inner{
-  max-width:1080px;margin:0 auto;padding:0 32px;
-  height:60px;display:flex;align-items:center;justify-content:space-between;
-}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-logo img{width:28px;height:28px;border-radius:6px;}
-.nav-wordmark{
-  font-family:'Cormorant Garamond',serif;
-  font-size:15px;font-weight:400;letter-spacing:0.08em;
-  color:var(--text);text-transform:uppercase;
-}
-.nav-wordmark span{color:var(--blue);}
-.nav-links{display:flex;align-items:center;gap:28px;}
-.nav-links a{
-  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--muted);text-decoration:none;
-  transition:color 0.18s;
-}
-.nav-links a:hover{color:var(--text);}
-.nav-links a.active{color:var(--blue);}
-
-/* ── HERO ── */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;padding:120px 0 80px;
-}
-.hero-eyebrow{
-  font-family:'DM Mono',monospace;font-size:10px;
-  letter-spacing:0.25em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:28px;
-  display:flex;align-items:center;gap:10px;
-}
-.hero-eyebrow::before{
-  content:'';width:32px;height:1px;background:var(--blue);
-}
-.hero-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3.2rem,8vw,6.4rem);
-  font-weight:300;line-height:1.0;
-  letter-spacing:-0.01em;
-  margin-bottom:32px;
-}
-.hero-title em{
-  font-style:italic;color:var(--blue);
-}
-.hero-title .line2{
-  display:block;
-  padding-left:clamp(40px,8vw,120px);
-}
-.hero-sub{
-  max-width:520px;font-size:15px;line-height:1.75;
-  color:var(--muted);margin-bottom:48px;
-}
-.hero-sub strong{color:var(--text);font-weight:400;}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
-.btn{
-  font-family:'Epilogue',sans-serif;font-weight:500;font-size:13px;
-  letter-spacing:0.04em;border-radius:8px;
-  padding:11px 24px;cursor:pointer;transition:all 0.18s;
-  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-  border:none;
-}
-.btn-primary{background:var(--blue);color:#0c0e14;}
-.btn-primary:hover{background:#99aaee;transform:translateY(-1px);}
-.btn-ghost{
-  background:transparent;color:var(--muted);
-  border:1px solid var(--border2);
-}
-.btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
-
-/* HERO SCROLL HINT */
-.scroll-hint{
-  margin-top:80px;display:flex;align-items:center;gap:12px;
-  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.15em;
-  text-transform:uppercase;color:var(--muted2);
-}
-.scroll-line{
-  width:40px;height:1px;background:var(--muted2);
-  animation:scrollPulse 2.5s ease infinite;
-}
-@keyframes scrollPulse{0%,100%{opacity:0.3;width:40px}50%{opacity:1;width:60px}}
-
-/* ── DIVIDER ── */
-.section-divider{
-  border:none;border-top:1px solid var(--border);
-  margin:0;
-}
-
-/* ── SECTION COMMON ── */
-section{padding:100px 0;}
-.section-label{
-  font-family:'DM Mono',monospace;font-size:10px;
-  letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:16px;
-  display:flex;align-items:center;gap:10px;
-}
-.section-label::before{content:'◈';}
-.section-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2rem,5vw,3.2rem);
-  font-weight:300;line-height:1.1;
-  margin-bottom:16px;
-}
-.section-sub{
-  font-size:14px;color:var(--muted);line-height:1.75;
-  max-width:540px;
-}
-
-/* ── ABOUT / PILLARS ── */
-.pillars{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1px;background:var(--border);
-  border:1px solid var(--border);border-radius:14px;
-  overflow:hidden;margin-top:56px;
-}
-.pillar{
-  background:var(--surface);padding:32px 28px;
-  transition:background 0.2s;
-}
-.pillar:hover{background:var(--surface2);}
-.pillar-num{
-  font-family:'DM Mono',monospace;font-size:10px;
-  color:var(--star);letter-spacing:0.15em;
-  margin-bottom:16px;
-}
-.pillar-name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:20px;font-weight:400;
-  margin-bottom:10px;color:var(--text);
-}
-.pillar-desc{font-size:13px;color:var(--muted);line-height:1.65;}
-
-/* ── APPROACH ── */
-.approach-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:40px;margin-top:56px;align-items:start;
-}
-.approach-text{font-size:14px;color:var(--muted);line-height:1.85;}
-.approach-text p{margin-bottom:16px;}
-.approach-text p:last-child{margin-bottom:0;}
-.approach-text strong{color:var(--text);font-weight:400;}
-.approach-quote{
-  background:var(--surface);border:1px solid var(--border);
-  border-left:3px solid var(--blue);
-  border-radius:0 12px 12px 0;
-  padding:28px 28px;
-}
-.approach-quote blockquote{
-  font-family:'Cormorant Garamond',serif;
-  font-size:22px;font-weight:300;font-style:italic;
-  line-height:1.55;color:var(--text);
-  margin-bottom:16px;
-}
-.approach-quote cite{
-  font-family:'DM Mono',monospace;font-size:10px;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);font-style:normal;
-}
-
-/* ── LAB ── */
-#lab{background:var(--surface);}
-.lab-header{
-  display:flex;justify-content:space-between;
-  align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px;
-}
-.lab-status{
-  display:inline-flex;align-items:center;gap:7px;
-  font-family:'DM Mono',monospace;font-size:10px;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);border:1px solid var(--border2);
-  border-radius:20px;padding:5px 13px;
-}
-.lab-status .dot{
-  width:5px;height:5px;border-radius:50%;
-  background:#60e8a0;animation:pulse 2s infinite;
-}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
-
-.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
-
-/* TOOL CARD */
-.tool-card{
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:16px;padding:28px;
-  text-decoration:none;color:inherit;
-  display:flex;flex-direction:column;gap:0;
-  transition:all 0.22s;position:relative;overflow:hidden;
-}
-.tool-card::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(circle at 20% 20%,rgba(136,153,221,0.07),transparent 60%);
-  opacity:0;transition:opacity 0.22s;
-}
-.tool-card:hover{
-  border-color:rgba(136,153,221,0.4);
-  transform:translateY(-3px);
-  box-shadow:0 8px 32px rgba(136,153,221,0.08);
-}
-.tool-card:hover::before{opacity:1;}
-.tool-tag{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:16px;
-}
-.tool-icon{
-  width:48px;height:48px;border-radius:12px;
-  background:var(--blue-dim);border:1px solid rgba(136,153,221,0.2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;margin-bottom:20px;
-}
-.tool-name{
-  font-family:'Cormorant Garamond',serif;
-  font-size:26px;font-weight:400;
-  margin-bottom:10px;
-}
-.tool-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:24px;flex:1;}
-.tool-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
-.tool-chip{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:0.1em;text-transform:uppercase;
-  padding:3px 9px;border-radius:5px;
-  border:1px solid var(--border2);color:var(--muted);
-}
-.tool-chip.hl{
-  border-color:rgba(136,153,221,0.3);
-  color:var(--blue);
-}
-.tool-link{
-  font-family:'DM Mono',monospace;font-size:11px;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--blue);display:flex;align-items:center;gap:6px;
-  transition:gap 0.18s;
-}
-.tool-card:hover .tool-link{gap:10px;}
-
-/* COMING SOON CARD */
-.tool-card.soon{opacity:0.5;pointer-events:none;}
-.tool-card.soon .tool-tag{color:var(--muted);}
-
-/* ── FOOTER ── */
-footer{
-  border-top:1px solid var(--border);
-  padding:40px 0;
-}
-.footer-inner{
-  display:flex;justify-content:space-between;
-  align-items:center;flex-wrap:wrap;gap:20px;
-}
-.footer-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:14px;font-weight:400;letter-spacing:0.1em;
-  text-transform:uppercase;color:var(--muted);
-}
-.footer-logo span{color:var(--blue);}
-.footer-copy{
-  font-family:'DM Mono',monospace;font-size:10px;
-  letter-spacing:0.1em;color:var(--muted2);
-}
-.footer-links{display:flex;gap:20px;}
-.footer-links a{
-  font-family:'DM Mono',monospace;font-size:10px;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;transition:color 0.15s;
-}
-.footer-links a:hover{color:var(--blue);}
-
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .wrap{padding:0 20px;}
-  .nav-links{display:none;}
-  .pillars{grid-template-columns:1fr;}
-  .approach-grid{grid-template-columns:1fr;}
-  .lab-header{flex-direction:column;align-items:flex-start;}
-  .footer-inner{flex-direction:column;align-items:flex-start;}
-}
-
-/* ── ANIMATIONS ── */
-.fade-up{
-  opacity:0;transform:translateY(20px);
-  animation:fadeUp 0.6s ease forwards;
-}
-@keyframes fadeUp{to{opacity:1;transform:none}}
-.fade-up:nth-child(1){animation-delay:0.1s}
-.fade-up:nth-child(2){animation-delay:0.2s}
-.fade-up:nth-child(3){animation-delay:0.3s}
-.fade-up:nth-child(4){animation-delay:0.4s}
-.fade-up:nth-child(5){animation-delay:0.5s}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">
+    <a class="nav-logo" href="index.html">
       <img src="logo_with_star__1_.png" alt="USR">
-      <span class="nav-wordmark"><span>U</span>nconventional <span>S</span>trategy &amp; <span>R</span>esearch</span>
+      <span class="nav-wordmark"><span>U</span>SR</span>
     </a>
     <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#lab" class="active">Lab</a>
+      <a href="approach.html">Approach</a>
+      <a href="lab.html">Lab</a>
       <a href="https://www.linkedin.com/company/unconventional-strategy-research/" target="_blank">LinkedIn</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="wrap">
   <div class="hero">
-    <div class="hero-eyebrow fade-up">Unconventional Strategy &amp; Research</div>
-    <h1 class="hero-title fade-up">
+    <div class="hero-eyebrow fade-up delay-1">Unconventional Strategy &amp; Research</div>
+    <h1 class="hero-title fade-up delay-2">
       Strategy built<br>
       <span class="line2">from <em>first principles</em></span>
     </h1>
-    <p class="hero-sub fade-up">
+    <p class="hero-sub fade-up delay-3">
       A research practice studying how the world's leading strategy firms think —
       synthesizing their frameworks, stress-testing their models, and
       <strong>building tools that make structured thinking accessible.</strong>
     </p>
-    <div class="hero-actions fade-up">
-      <a href="#lab" class="btn btn-primary">Explore the Lab →</a>
-      <a href="#about" class="btn btn-ghost">Our Approach</a>
+    <div class="hero-actions fade-up delay-4">
+      <a href="lab.html" class="btn btn-primary">Explore the Lab →</a>
+      <a href="approach.html" class="btn btn-ghost">Our Approach</a>
     </div>
-    <div class="scroll-hint fade-up">
+    <div class="scroll-hint fade-up delay-5">
       <div class="scroll-line"></div>
       Scroll to explore
     </div>
@@ -392,23 +183,21 @@ footer{
 
 <hr class="section-divider">
 
-<!-- ABOUT -->
 <section id="about">
   <div class="wrap">
     <div class="section-label">About</div>
     <h2 class="section-title">How we think</h2>
     <p class="section-sub">Three operating principles that shape everything we research and build.</p>
-
     <div class="pillars">
       <div class="pillar">
         <div class="pillar-num">01</div>
         <div class="pillar-name">Research First</div>
-        <div class="pillar-desc">Before building original models, we study the canonical ones deeply. Understanding what exists is the foundation for what comes next.</div>
+        <div class="pillar-desc">Before building original models, we study the canonical ones deeply — the frameworks, structures, and problem-solving methods developed by the world's leading strategy firms. Understanding what exists is the foundation for what comes next.</div>
       </div>
       <div class="pillar">
         <div class="pillar-num">02</div>
         <div class="pillar-name">Learn in Public</div>
-        <div class="pillar-desc">We publish our thinking as it develops — frameworks, syntheses, tools — not when it's finished, but when it's useful. The process is the product.</div>
+        <div class="pillar-desc">We publish our thinking as it develops — not when it's finished, but when it's useful. The process is the product.</div>
       </div>
       <div class="pillar">
         <div class="pillar-num">03</div>
@@ -416,12 +205,10 @@ footer{
         <div class="pillar-desc">The best way to test whether you've understood a framework is to build something from it. The Lab exists because of this belief.</div>
       </div>
     </div>
-
-    <div class="approach-grid" style="margin-top:80px;">
+    <div class="approach-grid">
       <div class="approach-text">
         <p>USR started as a question: <strong>why do the best consulting firms think so differently from everyone else?</strong> Not just their outputs — their process. The way they break a problem apart, structure uncertainty, and move from ambiguous data to a clear recommendation.</p>
-        <p>The answer isn't a secret framework. It's a set of thinking habits — pattern recognition, structured decomposition, hypothesis-driven analysis — that can be learned, practiced, and eventually extended.</p>
-        <p>That's what we're doing. <strong>Studying the discipline rigorously, synthesizing what we find, and building tools that make the thinking trainable</strong> — starting with our community, eventually at scale.</p>
+        <p>The answer isn't a secret framework. It's a set of thinking habits that can be learned, practiced, and eventually extended. <strong>That's what we're building toward.</strong></p>
       </div>
       <div class="approach-quote">
         <blockquote>"Most strategy advice tells you what to think. We're more interested in how to think."</blockquote>
@@ -433,71 +220,74 @@ footer{
 
 <hr class="section-divider">
 
-<!-- LAB -->
 <section id="lab">
   <div class="wrap">
     <div class="lab-header">
       <div>
         <div class="section-label">Research Lab</div>
         <h2 class="section-title">Tools from the research</h2>
-        <p class="section-sub">Interactive tools built directly from our synthesis work. Each one operationalizes a set of frameworks we've studied.</p>
+        <p class="section-sub">Interactive tools built directly from our synthesis work.</p>
       </div>
       <div class="lab-status"><span class="dot"></span> Active development</div>
     </div>
-
     <div class="lab-grid">
-
-      <!-- CASEIQ -->
       <a class="tool-card" href="https://unconventional-strategy-research.github.io/caseiq/" target="_blank">
-        <div class="tool-tag">Lab Tool — 001</div>
+        <div class="tool-tag">Lab — 001</div>
         <div class="tool-icon">🧠</div>
         <div class="tool-name">CaseIQ</div>
-        <div class="tool-desc">A 6-module consulting thinking trainer. Covers frameworks, bucket identification, hidden equations, quantitative problem solving, hypothesis generation, and synthesis.</div>
+        <div class="tool-desc">A 6-module consulting thinking trainer covering frameworks, bucket identification, quantitative problem solving, hypothesis generation, and synthesis.</div>
         <div class="tool-meta">
           <span class="tool-chip hl">6 modules</span>
           <span class="tool-chip hl">75 questions</span>
-          <span class="tool-chip">Case prep</span>
           <span class="tool-chip">Free</span>
         </div>
         <div class="tool-link">Open CaseIQ →</div>
       </a>
-
-      <!-- COMING SOON 1 -->
       <div class="tool-card soon">
-        <div class="tool-tag">Lab Tool — 002</div>
+        <div class="tool-tag">Lab — 002</div>
         <div class="tool-icon">📐</div>
         <div class="tool-name">Framework Atlas</div>
-        <div class="tool-desc">An interactive map of strategic frameworks — when to use them, how they relate, and where they break down. Built from our ongoing framework synthesis research.</div>
-        <div class="tool-meta">
-          <span class="tool-chip">Coming soon</span>
-        </div>
+        <div class="tool-desc">An interactive map of strategic frameworks — when to use them, how they relate, and where they break down.</div>
+        <div class="tool-meta"><span class="tool-chip">Coming soon</span></div>
         <div class="tool-link">In development</div>
       </div>
-
-      <!-- COMING SOON 2 -->
-      <div class="tool-card soon">
-        <div class="tool-tag">Lab Tool — 003</div>
-        <div class="tool-icon">⚡</div>
-        <div class="tool-name">Strategy Simulator</div>
-        <div class="tool-desc">End-to-end case simulations that string together analysis, hypothesis generation, and recommendation into a single timed session — mimicking the real interview flow.</div>
-        <div class="tool-meta">
-          <span class="tool-chip">Coming soon</span>
-        </div>
-        <div class="tool-link">In development</div>
-      </div>
-
+    </div>
+    <div class="lab-cta">
+      <a href="lab.html" class="btn btn-ghost">View all Lab tools →</a>
+      <span class="lab-cta-text">More tools in development</span>
     </div>
   </div>
 </section>
 
 <hr class="section-divider">
 
-<!-- FOOTER -->
+<section id="community">
+  <div class="wrap">
+    <div class="section-label">Community</div>
+    <h2 class="section-title">Case Prep Community</h2>
+    <p class="section-sub">A private community for people working through elite consulting frameworks together.</p>
+    <div class="discord-card">
+      <div class="discord-left">
+        <div class="discord-icon">💬</div>
+        <div class="discord-info">
+          <div class="discord-name">USR Case Prep — Discord</div>
+          <div class="discord-desc">A private server for members studying elite consulting frameworks — case walkthroughs, framework breakdowns, and structured thinking practice. Kept invite-only to maintain the quality of discussion.</div>
+        </div>
+      </div>
+      <div class="discord-badge">Private — Invite Only</div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
 <footer>
   <div class="wrap">
     <div class="footer-inner">
       <div class="footer-logo"><span>U</span>nconventional <span>S</span>trategy &amp; <span>R</span>esearch</div>
       <div class="footer-links">
+        <a href="approach.html">Approach</a>
+        <a href="lab.html">Lab</a>
         <a href="https://www.linkedin.com/company/unconventional-strategy-research/" target="_blank">LinkedIn</a>
         <a href="https://github.com/unconventional-strategy-research" target="_blank">GitHub</a>
       </div>
