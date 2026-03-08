@@ -227,7 +227,7 @@
 .tool-paper-dl { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-left: auto; white-space: nowrap; flex-shrink: 0; }
 
 /* TOOL CARD RESTRUCTURE */
-.tool-card { cursor: default; }
+.tool-card { cursor: default; pointer-events: auto; }
 .tool-link-btn {
   display: inline-block;
   margin-top: 16px;
@@ -255,6 +255,30 @@
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 10px;
+}
+
+/* LAB NOTES ROW */
+.lab-notes-row { display: flex; flex-direction: column; gap: 10px; margin-bottom: 64px; }
+.lab-note-card {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px 20px;
+  text-decoration: none; color: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+.lab-note-card:hover { border-color: rgba(136,153,221,0.4); background: var(--surface2, var(--surface)); }
+.lab-note-id {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  color: var(--muted); letter-spacing: 0.12em;
+  min-width: 28px;
+}
+.lab-note-body { flex: 1; }
+.lab-note-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.lab-note-sub { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.05em; }
+.lab-note-dl {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--blue); white-space: nowrap;
 }
 </style>
 </head>
@@ -336,21 +360,20 @@
 
         <a class="tool-link-btn" href="https://unconventional-strategy-research.github.io/caseiq/" target="_blank">Open CaseIQ →</a>
 
-        <!-- ── DIVIDER ── -->
-        <div class="tool-card-divider"></div>
-
-        <!-- ── LAB NOTE ── -->
-        <div class="tool-paper-label">Lab Note</div>
-        <a class="tool-paper-link" download="CaseIQ_Lab_Note_001.docx" href="resources/CaseIQ_Lab_Note_001.docx">
-          <span class="tool-paper-icon">📄</span>
-          <div>
-            <div class="tool-paper-title">Lab Note 001 — CaseIQ</div>
-            <div class="tool-paper-sub">Design rationale · Stats system · Cognitive taxonomy</div>
-          </div>
-          <span class="tool-paper-dl">↓ Download</span>
-        </a>
-
       </div>
+    </div>
+
+    <!-- ── LAB NOTES SECTION ── -->
+    <div class="tool-section-label" style="margin-top:0;">Lab Notes</div>
+    <div class="lab-notes-row">
+      <a class="lab-note-card" download="CaseIQ_Lab_Note_001.docx" href="resources/CaseIQ_Lab_Note_001.docx">
+        <div class="lab-note-id">001</div>
+        <div class="lab-note-body">
+          <div class="lab-note-title">CaseIQ</div>
+          <div class="lab-note-sub">Design rationale · Stats system · Cognitive taxonomy</div>
+        </div>
+        <span class="lab-note-dl">↓ .docx</span>
+      </a>
     </div>
 
 
