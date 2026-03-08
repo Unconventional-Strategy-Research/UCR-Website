@@ -73,6 +73,7 @@
   content: ''; position: absolute; inset: 0;
   background: radial-gradient(circle at 15% 15%, rgba(136,153,221,0.08), transparent 55%);
   opacity: 0; transition: opacity 0.22s;
+  pointer-events: none;
 }
 .tool-card:hover { border-color: rgba(136,153,221,0.45); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(136,153,221,0.09); }
 .tool-card:hover::before { opacity: 1; }
@@ -366,7 +367,7 @@
     <!-- ── LAB NOTES SECTION ── -->
     <div class="tool-section-label" style="margin-top:0;">Lab Notes</div>
     <div class="lab-notes-row">
-      <a class="lab-note-card" download="CaseIQ_Lab_Note_001.docx" href="resources/CaseIQ_Lab_Note_001.docx">
+      <a class="lab-note-card" download="caseiq_lab_note.docx" href="resources/caseiq_lab_note.docx">
         <div class="lab-note-id">001</div>
         <div class="lab-note-body">
           <div class="lab-note-title">CaseIQ</div>
